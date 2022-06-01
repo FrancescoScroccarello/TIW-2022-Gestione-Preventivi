@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="ISO-8859-1">
+<title>Home </title>
+</head>
+<body>
+<h1>
+<div th:text="${'Bentornato ' + user.getUsername()}">
+</div>
+</h1>
+<h4>
+	<div align="right">
+		<a th:href="@{/Logout}">Logout</a>
+	</div>
+	<form action="ShowOptions" method="post">
+		<select name="product">
+		<div th:each="p : ${products}">
+		    <option  th:text="${p.getName()}" th:value="${p.getID()}"></option>
+		</div>
+	    </select>
+		<input type="submit" value="Scegli prodotto"/>
+ 	</form>
+
+	<div th:if="${options!=null}">
+		<form action="CreatePreventive" method="post" required>
+			<div th:each="o : ${options}">
+				<input type="checkbox" name="option" th:value="${o.getCode()}">
+				<label th:text="${o.getName()}+', '+${o.getType()}"></label>
+				<br>
+			</div>
+			<input type="submit" value="Invia preventivo"/>
+ 			<input type="hidden" name="prodChosen" th:value="${prodChosen}">
+		</form>
+		<div th:text="${errorMsg}"></div>
+	</div>
+	
+	<div th:if="${preventives.size()>0}">
+			<br>
+			I tuoi preventivi:
+			<div th:each="p : ${preventives}">
+				<div th:text="${p.getProductName()}"></div>
+				<a th:href="@{/GetPreventiveDetails(preventiveid=${p.getID()})}">Dettagli</a>
+				<br>
+				<div th:if="${detail!=null and p.getID()==detail.getID()}">
+					<div th:if="${detail.getEmployee!=0}">
+						<div th:text="'Codice impiegato: '+${detail.getEmployee()}"></div>
+						<div th:each="opt : ${optionsDetail}">
+							<div th:text="${opt.getName()}+', '+${opt.getType()}"></div>
+						</div>					
+						<div th:text="'Prezzo: '+${detail.getPrice()}"></div>
+					</div>
+					<div th:if="${detail.getEmployee==0}" th:text="'Richiesta presa in carico'"></div>
+				</div>
+				<br>
+			</div>
+		
+	</div>  
+	<div th:if="${preventives.size() == 0}">
+		<br>
+		Non hai preventivi
+	</div>
+</h4>
+</body>
+</html>
