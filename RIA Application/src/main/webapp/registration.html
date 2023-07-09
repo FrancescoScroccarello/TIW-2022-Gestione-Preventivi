@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Register</title>
+<script src="util.js" charset="utf-8" defer></script>
+<script src="registrationHandler.js" charset="utf-8" defer></script>
+</head>
+<body>
+<h1>Benvenuto nella pagina di registrazione</h1>
+<h4>
+	<form action="#">
+		Name: <input type="text" name="name" required/> <br>
+		Surname: <input type="text" name="surname" required/> <br>
+		Email: <input type="text" name="email" required/> <br>
+		Username: <input type="text" name="username" required/> <br>
+		Password: <input type="password" name="password" required/> <br>
+		Conferma password: <input type="password" name="confirm" required/> <br>
+		<input type="button" id="registerbutton" value="Register"/>
+	</form>	
+</h4>
+<h5>
+	<p id="errormessage"></p>
+	
+</h5>
+
+</body>
+</html>

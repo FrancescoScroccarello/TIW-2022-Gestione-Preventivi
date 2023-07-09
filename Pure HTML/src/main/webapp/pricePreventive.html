@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Prezza preventivo</title>
+</head>
+<body>
+<h3>Informazioni sul prodotto:</h3>
+<h4>
+	<div align="right">
+		<a th:href="@{/BackToHome}">Torna alla home</a>
+	</div>
+	
+	<div th:text="${'Richiedente: '+username}"></div>	
+	<div th:text="${'Codice prodotto: '+preventive.getProduct()}"></div>
+	<div th:text="${'Nome prodotto: '+preventive.getProductName()}"></div>
+	<div th:each="o : ${options}">
+		<div th:text="${'Opzione: '+o.getName()+', '+o.getType()}"></div>
+	</div>
+	<form action="CompletePreventive" method="post">
+		<input type="text" name="price" required>
+		<input type="hidden" name="preventiveid" th:value="${preventiveid}">
+		<input type="submit" value="Applica prezzo"/>
+	</form>
+	<div th:text="${errorMsg}"></div>
+
+</h4>
+</body>
+</html>
